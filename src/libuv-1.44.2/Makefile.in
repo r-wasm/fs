@@ -290,10 +290,19 @@ check_PROGRAMS = test/run-tests$(EXEEXT)
 @HURD_TRUE@                    src/unix/posix-poll.c \
 @HURD_TRUE@                    src/unix/hurd.c
 
-@KFREEBSD_TRUE@am__append_43 = -D_GNU_SOURCE
-@LINUX_TRUE@am__append_44 = include/uv/linux.h
-@LINUX_TRUE@am__append_45 = -D_GNU_SOURCE
-@LINUX_TRUE@am__append_46 = src/unix/linux-core.c \
+@EMSCRIPTEN_TRUE@am__append_43 = include/uv/posix.h
+@EMSCRIPTEN_TRUE@am__append_44 = src/unix/no-fsevents.c \
+@EMSCRIPTEN_TRUE@                    src/unix/no-proctitle.c \
+@EMSCRIPTEN_TRUE@                    src/unix/posix-hrtime.c \
+@EMSCRIPTEN_TRUE@                    src/unix/emscripten-poll.c \
+@EMSCRIPTEN_TRUE@                    src/unix/bsd/setmode.c \
+@EMSCRIPTEN_TRUE@                    src/unix/bsd/strmode.c \
+@EMSCRIPTEN_TRUE@                    src/unix/bsd/reallocarray.c
+
+@KFREEBSD_TRUE@am__append_45 = -D_GNU_SOURCE
+@LINUX_TRUE@am__append_46 = include/uv/linux.h
+@LINUX_TRUE@am__append_47 = -D_GNU_SOURCE
+@LINUX_TRUE@am__append_48 = src/unix/linux-core.c \
 @LINUX_TRUE@                    src/unix/linux-inotify.c \
 @LINUX_TRUE@                    src/unix/linux-syscalls.c \
 @LINUX_TRUE@                    src/unix/linux-syscalls.h \
@@ -303,9 +312,9 @@ check_PROGRAMS = test/run-tests$(EXEEXT)
 @LINUX_TRUE@                    src/unix/random-sysctl-linux.c \
 @LINUX_TRUE@                    src/unix/epoll.c
 
-@LINUX_TRUE@am__append_47 = -lutil
-@MSYS_TRUE@am__append_48 = -D_GNU_SOURCE
-@MSYS_TRUE@am__append_49 = src/unix/cygwin.c \
+@LINUX_TRUE@am__append_49 = -lutil
+@MSYS_TRUE@am__append_50 = -D_GNU_SOURCE
+@MSYS_TRUE@am__append_51 = src/unix/cygwin.c \
 @MSYS_TRUE@                    src/unix/bsd-ifaddrs.c \
 @MSYS_TRUE@                    src/unix/no-fsevents.c \
 @MSYS_TRUE@                    src/unix/no-proctitle.c \
@@ -315,32 +324,32 @@ check_PROGRAMS = test/run-tests$(EXEEXT)
 @MSYS_TRUE@                    src/unix/sysinfo-loadavg.c \
 @MSYS_TRUE@                    src/unix/sysinfo-memory.c
 
-@NETBSD_TRUE@am__append_50 = include/uv/bsd.h
-@NETBSD_TRUE@am__append_51 = src/unix/bsd-ifaddrs.c \
+@NETBSD_TRUE@am__append_52 = include/uv/bsd.h
+@NETBSD_TRUE@am__append_53 = src/unix/bsd-ifaddrs.c \
 @NETBSD_TRUE@                    src/unix/bsd-proctitle.c \
 @NETBSD_TRUE@                    src/unix/kqueue.c \
 @NETBSD_TRUE@                    src/unix/netbsd.c \
 @NETBSD_TRUE@                    src/unix/posix-hrtime.c
 
-@NETBSD_TRUE@am__append_52 = -lutil
-@OPENBSD_TRUE@am__append_53 = include/uv/bsd.h
-@OPENBSD_TRUE@am__append_54 = src/unix/bsd-ifaddrs.c \
+@NETBSD_TRUE@am__append_54 = -lutil
+@OPENBSD_TRUE@am__append_55 = include/uv/bsd.h
+@OPENBSD_TRUE@am__append_56 = src/unix/bsd-ifaddrs.c \
 @OPENBSD_TRUE@                    src/unix/bsd-proctitle.c \
 @OPENBSD_TRUE@                    src/unix/kqueue.c \
 @OPENBSD_TRUE@                    src/unix/openbsd.c \
 @OPENBSD_TRUE@                    src/unix/posix-hrtime.c \
 @OPENBSD_TRUE@                    src/unix/random-getentropy.c
 
-@OPENBSD_TRUE@am__append_55 = -lutil
-@SUNOS_TRUE@am__append_56 = include/uv/sunos.h
-@SUNOS_TRUE@am__append_57 = -D__EXTENSIONS__ \
+@OPENBSD_TRUE@am__append_57 = -lutil
+@SUNOS_TRUE@am__append_58 = include/uv/sunos.h
+@SUNOS_TRUE@am__append_59 = -D__EXTENSIONS__ \
 @SUNOS_TRUE@                   -D_XOPEN_SOURCE=500 \
 @SUNOS_TRUE@                   -D_REENTRANT
 
-@SUNOS_TRUE@am__append_58 = src/unix/no-proctitle.c \
+@SUNOS_TRUE@am__append_60 = src/unix/no-proctitle.c \
 @SUNOS_TRUE@                    src/unix/sunos.c
 
-@OS390_TRUE@am__append_59 = -D_UNIX03_THREADS \
+@OS390_TRUE@am__append_61 = -D_UNIX03_THREADS \
 @OS390_TRUE@                   -D_UNIX03_SOURCE \
 @OS390_TRUE@                   -D_OPEN_SYS_IF_EXT=1 \
 @OS390_TRUE@                   -D_OPEN_MSGQ_EXT \
@@ -356,8 +365,8 @@ check_PROGRAMS = test/run-tests$(EXEEXT)
 @OS390_TRUE@                   -qXPLINK \
 @OS390_TRUE@                   -qFLOAT=IEEE
 
-@OS390_TRUE@am__append_60 = -qXPLINK
-@OS390_TRUE@am__append_61 = src/unix/pthread-fixes.c \
+@OS390_TRUE@am__append_62 = -qXPLINK
+@OS390_TRUE@am__append_63 = src/unix/pthread-fixes.c \
 @OS390_TRUE@                    src/unix/os390.c \
 @OS390_TRUE@                    src/unix/os390-syscalls.c \
 @OS390_TRUE@                    src/unix/proctitle.c
@@ -365,9 +374,9 @@ check_PROGRAMS = test/run-tests$(EXEEXT)
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_pthread.m4 \
-	$(top_srcdir)/m4/libtool.m4 $(top_srcdir)/m4/lt-obsolete.m4 \
-	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
-	$(top_srcdir)/m4/ltversion.m4 \
+	$(top_srcdir)/m4/libtool.m4 $(top_srcdir)/m4/ltoptions.m4 \
+	$(top_srcdir)/m4/ltsugar.m4 $(top_srcdir)/m4/ltversion.m4 \
+	$(top_srcdir)/m4/lt~obsolete.m4 \
 	$(top_srcdir)/m4/libuv-extra-automake-flags.m4 \
 	$(top_srcdir)/m4/as_case.m4 \
 	$(top_srcdir)/m4/libuv-check-flags.m4 \
@@ -446,7 +455,9 @@ am__libuv_la_SOURCES_DIST = src/fs-poll.c src/heap-inl.h src/idna.c \
 	src/unix/kqueue.c src/unix/proctitle.c \
 	src/unix/random-getentropy.c src/unix/bsd-proctitle.c \
 	src/unix/freebsd.c src/unix/random-getrandom.c \
-	src/unix/haiku.c src/unix/hurd.c src/unix/linux-core.c \
+	src/unix/haiku.c src/unix/hurd.c src/unix/emscripten-poll.c \
+	src/unix/bsd/setmode.c src/unix/bsd/strmode.c \
+	src/unix/bsd/reallocarray.c src/unix/linux-core.c \
 	src/unix/linux-inotify.c src/unix/linux-syscalls.c \
 	src/unix/linux-syscalls.h src/unix/random-sysctl-linux.c \
 	src/unix/epoll.c src/unix/netbsd.c src/unix/openbsd.c \
@@ -533,7 +544,14 @@ am__dirstamp = $(am__leading_dot)dirstamp
 @HURD_TRUE@	src/unix/libuv_la-posix-hrtime.lo \
 @HURD_TRUE@	src/unix/libuv_la-posix-poll.lo \
 @HURD_TRUE@	src/unix/libuv_la-hurd.lo
-@LINUX_TRUE@am__objects_12 = src/unix/libuv_la-linux-core.lo \
+@EMSCRIPTEN_TRUE@am__objects_12 = src/unix/libuv_la-no-fsevents.lo \
+@EMSCRIPTEN_TRUE@	src/unix/libuv_la-no-proctitle.lo \
+@EMSCRIPTEN_TRUE@	src/unix/libuv_la-posix-hrtime.lo \
+@EMSCRIPTEN_TRUE@	src/unix/libuv_la-emscripten-poll.lo \
+@EMSCRIPTEN_TRUE@	src/unix/bsd/libuv_la-setmode.lo \
+@EMSCRIPTEN_TRUE@	src/unix/bsd/libuv_la-strmode.lo \
+@EMSCRIPTEN_TRUE@	src/unix/bsd/libuv_la-reallocarray.lo
+@LINUX_TRUE@am__objects_13 = src/unix/libuv_la-linux-core.lo \
 @LINUX_TRUE@	src/unix/libuv_la-linux-inotify.lo \
 @LINUX_TRUE@	src/unix/libuv_la-linux-syscalls.lo \
 @LINUX_TRUE@	src/unix/libuv_la-procfs-exepath.lo \
@@ -541,7 +559,7 @@ am__dirstamp = $(am__leading_dot)dirstamp
 @LINUX_TRUE@	src/unix/libuv_la-random-getrandom.lo \
 @LINUX_TRUE@	src/unix/libuv_la-random-sysctl-linux.lo \
 @LINUX_TRUE@	src/unix/libuv_la-epoll.lo
-@MSYS_TRUE@am__objects_13 = src/unix/libuv_la-cygwin.lo \
+@MSYS_TRUE@am__objects_14 = src/unix/libuv_la-cygwin.lo \
 @MSYS_TRUE@	src/unix/libuv_la-bsd-ifaddrs.lo \
 @MSYS_TRUE@	src/unix/libuv_la-no-fsevents.lo \
 @MSYS_TRUE@	src/unix/libuv_la-no-proctitle.lo \
@@ -550,20 +568,20 @@ am__dirstamp = $(am__leading_dot)dirstamp
 @MSYS_TRUE@	src/unix/libuv_la-procfs-exepath.lo \
 @MSYS_TRUE@	src/unix/libuv_la-sysinfo-loadavg.lo \
 @MSYS_TRUE@	src/unix/libuv_la-sysinfo-memory.lo
-@NETBSD_TRUE@am__objects_14 = src/unix/libuv_la-bsd-ifaddrs.lo \
+@NETBSD_TRUE@am__objects_15 = src/unix/libuv_la-bsd-ifaddrs.lo \
 @NETBSD_TRUE@	src/unix/libuv_la-bsd-proctitle.lo \
 @NETBSD_TRUE@	src/unix/libuv_la-kqueue.lo \
 @NETBSD_TRUE@	src/unix/libuv_la-netbsd.lo \
 @NETBSD_TRUE@	src/unix/libuv_la-posix-hrtime.lo
-@OPENBSD_TRUE@am__objects_15 = src/unix/libuv_la-bsd-ifaddrs.lo \
+@OPENBSD_TRUE@am__objects_16 = src/unix/libuv_la-bsd-ifaddrs.lo \
 @OPENBSD_TRUE@	src/unix/libuv_la-bsd-proctitle.lo \
 @OPENBSD_TRUE@	src/unix/libuv_la-kqueue.lo \
 @OPENBSD_TRUE@	src/unix/libuv_la-openbsd.lo \
 @OPENBSD_TRUE@	src/unix/libuv_la-posix-hrtime.lo \
 @OPENBSD_TRUE@	src/unix/libuv_la-random-getentropy.lo
-@SUNOS_TRUE@am__objects_16 = src/unix/libuv_la-no-proctitle.lo \
+@SUNOS_TRUE@am__objects_17 = src/unix/libuv_la-no-proctitle.lo \
 @SUNOS_TRUE@	src/unix/libuv_la-sunos.lo
-@OS390_TRUE@am__objects_17 = src/unix/libuv_la-pthread-fixes.lo \
+@OS390_TRUE@am__objects_18 = src/unix/libuv_la-pthread-fixes.lo \
 @OS390_TRUE@	src/unix/libuv_la-os390.lo \
 @OS390_TRUE@	src/unix/libuv_la-os390-syscalls.lo \
 @OS390_TRUE@	src/unix/libuv_la-proctitle.lo
@@ -577,7 +595,8 @@ am_libuv_la_OBJECTS = src/libuv_la-fs-poll.lo src/libuv_la-idna.lo \
 	$(am__objects_6) $(am__objects_7) $(am__objects_8) \
 	$(am__objects_9) $(am__objects_10) $(am__objects_11) \
 	$(am__objects_12) $(am__objects_13) $(am__objects_14) \
-	$(am__objects_15) $(am__objects_16) $(am__objects_17)
+	$(am__objects_15) $(am__objects_16) $(am__objects_17) \
+	$(am__objects_18)
 libuv_la_OBJECTS = $(am_libuv_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -681,8 +700,8 @@ am__test_run_tests_SOURCES_DIST = test/blackhole-server.c \
 	test/test-uname.c test/test-walk-handles.c \
 	test/test-watcher-cross-stop.c test/runner-win.c \
 	test/runner-win.h test/runner-unix.c test/runner-unix.h
-@WINNT_TRUE@am__objects_18 = test/run_tests-runner-win.$(OBJEXT)
-@WINNT_FALSE@am__objects_19 = test/run_tests-runner-unix.$(OBJEXT)
+@WINNT_TRUE@am__objects_19 = test/run_tests-runner-win.$(OBJEXT)
+@WINNT_FALSE@am__objects_20 = test/run_tests-runner-unix.$(OBJEXT)
 am_test_run_tests_OBJECTS = test/run_tests-blackhole-server.$(OBJEXT) \
 	test/run_tests-echo-server.$(OBJEXT) \
 	test/run_tests-run-tests.$(OBJEXT) \
@@ -854,7 +873,7 @@ am_test_run_tests_OBJECTS = test/run_tests-blackhole-server.$(OBJEXT) \
 	test/run_tests-test-uname.$(OBJEXT) \
 	test/run_tests-test-walk-handles.$(OBJEXT) \
 	test/run_tests-test-watcher-cross-stop.$(OBJEXT) \
-	$(am__objects_18) $(am__objects_19)
+	$(am__objects_19) $(am__objects_20)
 test_run_tests_OBJECTS = $(am_test_run_tests_OBJECTS)
 test_run_tests_DEPENDENCIES = libuv.la
 test_run_tests_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
@@ -897,6 +916,7 @@ am__depfiles_remade = src/$(DEPDIR)/libuv_la-fs-poll.Plo \
 	src/unix/$(DEPDIR)/libuv_la-darwin-proctitle.Plo \
 	src/unix/$(DEPDIR)/libuv_la-darwin.Plo \
 	src/unix/$(DEPDIR)/libuv_la-dl.Plo \
+	src/unix/$(DEPDIR)/libuv_la-emscripten-poll.Plo \
 	src/unix/$(DEPDIR)/libuv_la-epoll.Plo \
 	src/unix/$(DEPDIR)/libuv_la-freebsd.Plo \
 	src/unix/$(DEPDIR)/libuv_la-fs.Plo \
@@ -939,6 +959,9 @@ am__depfiles_remade = src/$(DEPDIR)/libuv_la-fs-poll.Plo \
 	src/unix/$(DEPDIR)/libuv_la-thread.Plo \
 	src/unix/$(DEPDIR)/libuv_la-tty.Plo \
 	src/unix/$(DEPDIR)/libuv_la-udp.Plo \
+	src/unix/bsd/$(DEPDIR)/libuv_la-reallocarray.Plo \
+	src/unix/bsd/$(DEPDIR)/libuv_la-setmode.Plo \
+	src/unix/bsd/$(DEPDIR)/libuv_la-strmode.Plo \
 	src/win/$(DEPDIR)/libuv_la-async.Plo \
 	src/win/$(DEPDIR)/libuv_la-core.Plo \
 	src/win/$(DEPDIR)/libuv_la-detect-wakeup.Plo \
@@ -1369,17 +1392,18 @@ uvinclude_HEADERS = include/uv/errno.h include/uv/threadpool.h \
 	include/uv/version.h $(am__append_2) $(am__append_5) \
 	$(am__append_18) $(am__append_21) $(am__append_25) \
 	$(am__append_28) $(am__append_32) $(am__append_35) \
-	$(am__append_38) $(am__append_41) $(am__append_44) \
-	$(am__append_50) $(am__append_53) $(am__append_56)
+	$(am__append_38) $(am__append_41) $(am__append_43) \
+	$(am__append_46) $(am__append_52) $(am__append_55) \
+	$(am__append_58)
 CLEANFILES = 
 lib_LTLIBRARIES = libuv.la
 libuv_la_CFLAGS = $(AM_CFLAGS) $(am__append_1) $(am__append_17) \
 	$(am__append_20) $(am__append_23) $(am__append_26) \
-	$(am__append_29) $(am__append_39) $(am__append_43) \
-	$(am__append_45) $(am__append_48) $(am__append_57) \
-	$(am__append_59)
+	$(am__append_29) $(am__append_39) $(am__append_45) \
+	$(am__append_47) $(am__append_50) $(am__append_59) \
+	$(am__append_61)
 libuv_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined -version-info 1:0:0 \
-	$(am__append_60)
+	$(am__append_62)
 libuv_la_SOURCES = src/fs-poll.c src/heap-inl.h src/idna.c src/idna.h \
 	src/inet.c src/queue.h src/random.c src/strscpy.c \
 	src/strscpy.h src/threadpool.c src/timer.c \
@@ -1388,9 +1412,9 @@ libuv_la_SOURCES = src/fs-poll.c src/heap-inl.h src/idna.c src/idna.h \
 	$(am__append_7) $(am__append_19) $(am__append_22) \
 	$(am__append_24) $(am__append_27) $(am__append_30) \
 	$(am__append_33) $(am__append_36) $(am__append_40) \
-	$(am__append_42) $(am__append_46) $(am__append_49) \
-	$(am__append_51) $(am__append_54) $(am__append_58) \
-	$(am__append_61)
+	$(am__append_42) $(am__append_44) $(am__append_48) \
+	$(am__append_51) $(am__append_53) $(am__append_56) \
+	$(am__append_60) $(am__append_63)
 EXTRA_DIST = test/fixtures/empty_file \
              test/fixtures/load_error.node \
              test/fixtures/lorem_ipsum.txt \
@@ -1405,8 +1429,8 @@ test_run_tests_CFLAGS = $(AM_CFLAGS) $(am__append_8) $(am__append_11) \
 	$(am__append_12) $(am__append_13) $(am__append_14) \
 	$(am__append_15) $(am__append_16)
 test_run_tests_LDFLAGS = $(AM_LDFLAGS) $(am__append_31) \
-	$(am__append_34) $(am__append_37) $(am__append_47) \
-	$(am__append_52) $(am__append_55)
+	$(am__append_34) $(am__append_37) $(am__append_49) \
+	$(am__append_54) $(am__append_57)
 test_run_tests_SOURCES = test/blackhole-server.c test/echo-server.c \
 	test/run-tests.c test/runner.c test/runner.h test/task.h \
 	test/test-active.c test/test-async.c test/test-async-null-cb.c \
@@ -1759,6 +1783,20 @@ src/unix/libuv_la-haiku.lo: src/unix/$(am__dirstamp) \
 	src/unix/$(DEPDIR)/$(am__dirstamp)
 src/unix/libuv_la-hurd.lo: src/unix/$(am__dirstamp) \
 	src/unix/$(DEPDIR)/$(am__dirstamp)
+src/unix/libuv_la-emscripten-poll.lo: src/unix/$(am__dirstamp) \
+	src/unix/$(DEPDIR)/$(am__dirstamp)
+src/unix/bsd/$(am__dirstamp):
+	@$(MKDIR_P) src/unix/bsd
+	@: > src/unix/bsd/$(am__dirstamp)
+src/unix/bsd/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) src/unix/bsd/$(DEPDIR)
+	@: > src/unix/bsd/$(DEPDIR)/$(am__dirstamp)
+src/unix/bsd/libuv_la-setmode.lo: src/unix/bsd/$(am__dirstamp) \
+	src/unix/bsd/$(DEPDIR)/$(am__dirstamp)
+src/unix/bsd/libuv_la-strmode.lo: src/unix/bsd/$(am__dirstamp) \
+	src/unix/bsd/$(DEPDIR)/$(am__dirstamp)
+src/unix/bsd/libuv_la-reallocarray.lo: src/unix/bsd/$(am__dirstamp) \
+	src/unix/bsd/$(DEPDIR)/$(am__dirstamp)
 src/unix/libuv_la-linux-core.lo: src/unix/$(am__dirstamp) \
 	src/unix/$(DEPDIR)/$(am__dirstamp)
 src/unix/libuv_la-linux-inotify.lo: src/unix/$(am__dirstamp) \
@@ -2145,6 +2183,8 @@ mostlyclean-compile:
 	-rm -f src/*.lo
 	-rm -f src/unix/*.$(OBJEXT)
 	-rm -f src/unix/*.lo
+	-rm -f src/unix/bsd/*.$(OBJEXT)
+	-rm -f src/unix/bsd/*.lo
 	-rm -f src/win/*.$(OBJEXT)
 	-rm -f src/win/*.lo
 	-rm -f test/*.$(OBJEXT)
@@ -2173,6 +2213,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/unix/$(DEPDIR)/libuv_la-darwin-proctitle.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/unix/$(DEPDIR)/libuv_la-darwin.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/unix/$(DEPDIR)/libuv_la-dl.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/unix/$(DEPDIR)/libuv_la-emscripten-poll.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/unix/$(DEPDIR)/libuv_la-epoll.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/unix/$(DEPDIR)/libuv_la-freebsd.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/unix/$(DEPDIR)/libuv_la-fs.Plo@am__quote@ # am--include-marker
@@ -2215,6 +2256,9 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/unix/$(DEPDIR)/libuv_la-thread.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/unix/$(DEPDIR)/libuv_la-tty.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/unix/$(DEPDIR)/libuv_la-udp.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/unix/bsd/$(DEPDIR)/libuv_la-reallocarray.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/unix/bsd/$(DEPDIR)/libuv_la-setmode.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@src/unix/bsd/$(DEPDIR)/libuv_la-strmode.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/win/$(DEPDIR)/libuv_la-async.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/win/$(DEPDIR)/libuv_la-core.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/win/$(DEPDIR)/libuv_la-detect-wakeup.Plo@am__quote@ # am--include-marker
@@ -2981,6 +3025,34 @@ src/unix/libuv_la-hurd.lo: src/unix/hurd.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/unix/hurd.c' object='src/unix/libuv_la-hurd.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libuv_la_CFLAGS) $(CFLAGS) -c -o src/unix/libuv_la-hurd.lo `test -f 'src/unix/hurd.c' || echo '$(srcdir)/'`src/unix/hurd.c
+
+src/unix/libuv_la-emscripten-poll.lo: src/unix/emscripten-poll.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libuv_la_CFLAGS) $(CFLAGS) -MT src/unix/libuv_la-emscripten-poll.lo -MD -MP -MF src/unix/$(DEPDIR)/libuv_la-emscripten-poll.Tpo -c -o src/unix/libuv_la-emscripten-poll.lo `test -f 'src/unix/emscripten-poll.c' || echo '$(srcdir)/'`src/unix/emscripten-poll.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/unix/$(DEPDIR)/libuv_la-emscripten-poll.Tpo src/unix/$(DEPDIR)/libuv_la-emscripten-poll.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/unix/emscripten-poll.c' object='src/unix/libuv_la-emscripten-poll.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libuv_la_CFLAGS) $(CFLAGS) -c -o src/unix/libuv_la-emscripten-poll.lo `test -f 'src/unix/emscripten-poll.c' || echo '$(srcdir)/'`src/unix/emscripten-poll.c
+
+src/unix/bsd/libuv_la-setmode.lo: src/unix/bsd/setmode.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libuv_la_CFLAGS) $(CFLAGS) -MT src/unix/bsd/libuv_la-setmode.lo -MD -MP -MF src/unix/bsd/$(DEPDIR)/libuv_la-setmode.Tpo -c -o src/unix/bsd/libuv_la-setmode.lo `test -f 'src/unix/bsd/setmode.c' || echo '$(srcdir)/'`src/unix/bsd/setmode.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/unix/bsd/$(DEPDIR)/libuv_la-setmode.Tpo src/unix/bsd/$(DEPDIR)/libuv_la-setmode.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/unix/bsd/setmode.c' object='src/unix/bsd/libuv_la-setmode.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libuv_la_CFLAGS) $(CFLAGS) -c -o src/unix/bsd/libuv_la-setmode.lo `test -f 'src/unix/bsd/setmode.c' || echo '$(srcdir)/'`src/unix/bsd/setmode.c
+
+src/unix/bsd/libuv_la-strmode.lo: src/unix/bsd/strmode.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libuv_la_CFLAGS) $(CFLAGS) -MT src/unix/bsd/libuv_la-strmode.lo -MD -MP -MF src/unix/bsd/$(DEPDIR)/libuv_la-strmode.Tpo -c -o src/unix/bsd/libuv_la-strmode.lo `test -f 'src/unix/bsd/strmode.c' || echo '$(srcdir)/'`src/unix/bsd/strmode.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/unix/bsd/$(DEPDIR)/libuv_la-strmode.Tpo src/unix/bsd/$(DEPDIR)/libuv_la-strmode.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/unix/bsd/strmode.c' object='src/unix/bsd/libuv_la-strmode.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libuv_la_CFLAGS) $(CFLAGS) -c -o src/unix/bsd/libuv_la-strmode.lo `test -f 'src/unix/bsd/strmode.c' || echo '$(srcdir)/'`src/unix/bsd/strmode.c
+
+src/unix/bsd/libuv_la-reallocarray.lo: src/unix/bsd/reallocarray.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libuv_la_CFLAGS) $(CFLAGS) -MT src/unix/bsd/libuv_la-reallocarray.lo -MD -MP -MF src/unix/bsd/$(DEPDIR)/libuv_la-reallocarray.Tpo -c -o src/unix/bsd/libuv_la-reallocarray.lo `test -f 'src/unix/bsd/reallocarray.c' || echo '$(srcdir)/'`src/unix/bsd/reallocarray.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) src/unix/bsd/$(DEPDIR)/libuv_la-reallocarray.Tpo src/unix/bsd/$(DEPDIR)/libuv_la-reallocarray.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='src/unix/bsd/reallocarray.c' object='src/unix/bsd/libuv_la-reallocarray.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libuv_la_CFLAGS) $(CFLAGS) -c -o src/unix/bsd/libuv_la-reallocarray.lo `test -f 'src/unix/bsd/reallocarray.c' || echo '$(srcdir)/'`src/unix/bsd/reallocarray.c
 
 src/unix/libuv_la-linux-core.lo: src/unix/linux-core.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libuv_la_CFLAGS) $(CFLAGS) -MT src/unix/libuv_la-linux-core.lo -MD -MP -MF src/unix/$(DEPDIR)/libuv_la-linux-core.Tpo -c -o src/unix/libuv_la-linux-core.lo `test -f 'src/unix/linux-core.c' || echo '$(srcdir)/'`src/unix/linux-core.c
@@ -5481,6 +5553,7 @@ clean-libtool:
 	-rm -rf .libs _libs
 	-rm -rf src/.libs src/_libs
 	-rm -rf src/unix/.libs src/unix/_libs
+	-rm -rf src/unix/bsd/.libs src/unix/bsd/_libs
 	-rm -rf src/win/.libs src/win/_libs
 	-rm -rf test/.libs test/_libs
 
@@ -5915,6 +5988,8 @@ distclean-generic:
 	-rm -f src/$(am__dirstamp)
 	-rm -f src/unix/$(DEPDIR)/$(am__dirstamp)
 	-rm -f src/unix/$(am__dirstamp)
+	-rm -f src/unix/bsd/$(DEPDIR)/$(am__dirstamp)
+	-rm -f src/unix/bsd/$(am__dirstamp)
 	-rm -f src/win/$(DEPDIR)/$(am__dirstamp)
 	-rm -f src/win/$(am__dirstamp)
 	-rm -f test/$(DEPDIR)/$(am__dirstamp)
@@ -5951,6 +6026,7 @@ distclean: distclean-am
 	-rm -f src/unix/$(DEPDIR)/libuv_la-darwin-proctitle.Plo
 	-rm -f src/unix/$(DEPDIR)/libuv_la-darwin.Plo
 	-rm -f src/unix/$(DEPDIR)/libuv_la-dl.Plo
+	-rm -f src/unix/$(DEPDIR)/libuv_la-emscripten-poll.Plo
 	-rm -f src/unix/$(DEPDIR)/libuv_la-epoll.Plo
 	-rm -f src/unix/$(DEPDIR)/libuv_la-freebsd.Plo
 	-rm -f src/unix/$(DEPDIR)/libuv_la-fs.Plo
@@ -5993,6 +6069,9 @@ distclean: distclean-am
 	-rm -f src/unix/$(DEPDIR)/libuv_la-thread.Plo
 	-rm -f src/unix/$(DEPDIR)/libuv_la-tty.Plo
 	-rm -f src/unix/$(DEPDIR)/libuv_la-udp.Plo
+	-rm -f src/unix/bsd/$(DEPDIR)/libuv_la-reallocarray.Plo
+	-rm -f src/unix/bsd/$(DEPDIR)/libuv_la-setmode.Plo
+	-rm -f src/unix/bsd/$(DEPDIR)/libuv_la-strmode.Plo
 	-rm -f src/win/$(DEPDIR)/libuv_la-async.Plo
 	-rm -f src/win/$(DEPDIR)/libuv_la-core.Plo
 	-rm -f src/win/$(DEPDIR)/libuv_la-detect-wakeup.Plo
@@ -6259,6 +6338,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/unix/$(DEPDIR)/libuv_la-darwin-proctitle.Plo
 	-rm -f src/unix/$(DEPDIR)/libuv_la-darwin.Plo
 	-rm -f src/unix/$(DEPDIR)/libuv_la-dl.Plo
+	-rm -f src/unix/$(DEPDIR)/libuv_la-emscripten-poll.Plo
 	-rm -f src/unix/$(DEPDIR)/libuv_la-epoll.Plo
 	-rm -f src/unix/$(DEPDIR)/libuv_la-freebsd.Plo
 	-rm -f src/unix/$(DEPDIR)/libuv_la-fs.Plo
@@ -6301,6 +6381,9 @@ maintainer-clean: maintainer-clean-am
 	-rm -f src/unix/$(DEPDIR)/libuv_la-thread.Plo
 	-rm -f src/unix/$(DEPDIR)/libuv_la-tty.Plo
 	-rm -f src/unix/$(DEPDIR)/libuv_la-udp.Plo
+	-rm -f src/unix/bsd/$(DEPDIR)/libuv_la-reallocarray.Plo
+	-rm -f src/unix/bsd/$(DEPDIR)/libuv_la-setmode.Plo
+	-rm -f src/unix/bsd/$(DEPDIR)/libuv_la-strmode.Plo
 	-rm -f src/win/$(DEPDIR)/libuv_la-async.Plo
 	-rm -f src/win/$(DEPDIR)/libuv_la-core.Plo
 	-rm -f src/win/$(DEPDIR)/libuv_la-detect-wakeup.Plo

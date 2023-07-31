@@ -659,6 +659,8 @@ ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
 LIBOBJS
+EMSCRIPTEN_FALSE
+EMSCRIPTEN_TRUE
 WINNT_FALSE
 WINNT_TRUE
 SUNOS_FALSE
@@ -15136,6 +15138,17 @@ else
   WINNT_FALSE=
 fi
 
+ if case $host_os in
+  emscripten*) true ;;
+  *) false ;;
+esac; then
+  EMSCRIPTEN_TRUE=
+  EMSCRIPTEN_FALSE='#'
+else
+  EMSCRIPTEN_TRUE='#'
+  EMSCRIPTEN_FALSE=
+fi
+
 case $host_os in
   mingw*)
     LIBS="$LIBS -lws2_32 -lpsapi -liphlpapi -lshell32 -luserenv -luser32"
@@ -15446,6 +15459,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${WINNT_TRUE}" && test -z "${WINNT_FALSE}"; then
   as_fn_error $? "conditional \"WINNT\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${EMSCRIPTEN_TRUE}" && test -z "${EMSCRIPTEN_FALSE}"; then
+  as_fn_error $? "conditional \"EMSCRIPTEN\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 

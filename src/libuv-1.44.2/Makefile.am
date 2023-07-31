@@ -467,6 +467,17 @@ libuv_la_SOURCES += src/unix/bsd-ifaddrs.c \
                     src/unix/hurd.c
 endif
 
+if EMSCRIPTEN
+uvinclude_HEADERS += include/uv/posix.h
+libuv_la_SOURCES += src/unix/no-fsevents.c \
+                    src/unix/no-proctitle.c \
+                    src/unix/posix-hrtime.c \
+                    src/unix/emscripten-poll.c \
+                    src/unix/bsd/setmode.c \
+                    src/unix/bsd/strmode.c \
+                    src/unix/bsd/reallocarray.c
+endif
+
 if KFREEBSD
 libuv_la_CFLAGS += -D_GNU_SOURCE
 endif
